@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WPBO_Assignment</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="registration_fragment_label">Registration Screen</string>
+    <string name="user_list_fragment_label">User List Screen</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+</resources>

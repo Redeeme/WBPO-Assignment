@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/RegistrationFragment">
+
+    <fragment
+        android:id="@+id/RegistrationFragment"
+        android:name="sk.doxxbet.doxxbetui.wpbo_assignment.RegistrationFragment"
+        android:label="@string/registration_fragment_label"
+        tools:layout="@layout/fragment_registration">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/UserListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/UserListFragment"
+        android:name="sk.doxxbet.doxxbetui.wpbo_assignment.UserListFragment"
+        android:label="@string/user_list_fragment_label"
+        tools:layout="@layout/fragment_user_list">
+
+        <action
+            android:id="@+id/action_UserListFragment_to_RegistrationFragment"
+            app:destination="@id/RegistrationFragment" />
+    </fragment>
+</navigation>
