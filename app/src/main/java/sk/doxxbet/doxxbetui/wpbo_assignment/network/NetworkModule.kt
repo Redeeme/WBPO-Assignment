@@ -1,4 +1,4 @@
-package sk.doxxbet.doxxbetui.wpbo_assignment
+package sk.doxxbet.doxxbetui.wpbo_assignment.network
 
 import android.content.Context
 import com.chuckerteam.chucker.BuildConfig
@@ -13,10 +13,10 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.HttpException
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.UserRepository
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.UserService
 import java.net.CookieManager
 import java.net.CookiePolicy
 import java.util.concurrent.TimeUnit
@@ -81,31 +81,3 @@ object NetworkModule {
         UserRepository(userService)
 }
 
-suspend fun <T> executeRequest(
-    request : suspend () -> Response<T>,
-) : Resource<T> {
-    return try {
-
-        val result = request.invoke()
-        println("${result} 77777771")
-        val body = result.body()
-        println("${body} 77777771")
-
-        if (result.isSuccessful && body != null) {
-            Resource.Success(body)
-        } else {
-            result.errorBody()?.source()?.let { bs ->
-                val parsedBody = Moshi.Builder().add(KotlinJsonAdapterFactory()).build().adapter(ErrorResponse::class.java).fromJson(bs)
-                Resource.Error<T>(
-                    message = parsedBody?.message ?: result.message()
-                )
-            } ?: Resource.Error(message = result.message())
-        }
-    } catch (e: HttpException) {
-        println(e)
-        Resource.Error(message = e.message())
-    } catch (e: Exception){
-        println("error: ${e.message}")
-        Resource.Error(message = e.message)
-    }
-}

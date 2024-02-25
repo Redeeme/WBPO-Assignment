@@ -1,10 +1,13 @@
-package sk.doxxbet.doxxbetui.wpbo_assignment
+package sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo
 
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.RegisterRequest
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.RegisterResponse
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.UserResponse
 
 interface UserService {
 

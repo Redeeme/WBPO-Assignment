@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentRegistrationBinding
 
@@ -14,6 +16,7 @@ import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentRegistrationBind
 class RegistrationFragment : Fragment() {
 
     private var _binding: FragmentRegistrationBinding? = null
+    private val model: MainViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.

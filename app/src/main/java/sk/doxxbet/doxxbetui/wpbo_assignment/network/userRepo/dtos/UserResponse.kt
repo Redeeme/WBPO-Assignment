@@ -1,6 +1,7 @@
-package sk.doxxbet.doxxbetui.wpbo_assignment
+package sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos
 
 import com.squareup.moshi.Json
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.UserDto
 
 data class UserResponse(
     @Json(name = "page")

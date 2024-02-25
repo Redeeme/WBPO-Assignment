@@ -1,4 +1,4 @@
-package sk.doxxbet.doxxbetui.wpbo_assignment
+package sk.doxxbet.doxxbetui.wpbo_assignment.network
 
 sealed class Resource<T>(
     val type: ResourceType,

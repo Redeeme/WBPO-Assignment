@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentUserListBinding
 
 /**
@@ -13,6 +15,7 @@ import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentUserListBinding
 class UserListFragment : Fragment() {
 
     private var _binding: FragmentUserListBinding? = null
+    private val model: MainViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
