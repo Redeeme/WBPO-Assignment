@@ -16,7 +16,7 @@ interface UserService {
 
     @GET("/api/users")
     suspend fun getUsers(
-        @Query("PAGE") page: Int,
-        @Query("PER_PAGE") perPage: Int,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
     ): Response<UserResponse>
 }

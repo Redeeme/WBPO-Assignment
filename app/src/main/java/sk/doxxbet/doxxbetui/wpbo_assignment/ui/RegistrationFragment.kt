@@ -1,4 +1,4 @@
-package sk.doxxbet.doxxbetui.wpbo_assignment
+package sk.doxxbet.doxxbetui.wpbo_assignment.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentUserListBinding
+import androidx.navigation.fragment.findNavController
+import sk.doxxbet.doxxbetui.wpbo_assignment.MainViewModel
+import sk.doxxbet.doxxbetui.wpbo_assignment.R
+import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentRegistrationBinding
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class UserListFragment : Fragment() {
+class RegistrationFragment : Fragment() {
 
-    private var _binding: FragmentUserListBinding? = null
+    private var _binding: FragmentRegistrationBinding? = null
     private val model: MainViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
@@ -26,13 +28,17 @@ class UserListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentUserListBinding.inflate(inflater, container, false)
+        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.registerButton.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
     }
 
     override fun onDestroyView() {

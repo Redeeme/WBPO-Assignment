@@ -75,6 +75,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp-urlconnection:4.2.1")
     // Chucker OKHTTP interceptor
     implementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
-
+    //Picasso
+    implementation("com.squareup.picasso:picasso:2.5.2")
 
 }

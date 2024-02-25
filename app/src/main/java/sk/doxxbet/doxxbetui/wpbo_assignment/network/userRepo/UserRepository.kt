@@ -21,11 +21,11 @@ class UserRepository(private val userService: UserService) {
             )
         }
 
-    suspend fun getUsers(): Resource<UserResponse> =
+    suspend fun getUsers(page: Int,perPage: Int): Resource<UserResponse> =
         withContext(Dispatchers.IO) {
             return@withContext executeRequest(
                 request = {
-                    userService.getUsers(1,5)
+                    userService.getUsers(page,perPage)
                 }
             )
         }

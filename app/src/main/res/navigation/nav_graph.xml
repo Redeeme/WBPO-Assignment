@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/RegistrationFragment"
-        android:name="sk.doxxbet.doxxbetui.wpbo_assignment.RegistrationFragment"
+        android:name="sk.doxxbet.doxxbetui.wpbo_assignment.ui.RegistrationFragment"
         android:label="@string/registration_fragment_label"
         tools:layout="@layout/fragment_registration">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/UserListFragment"
-        android:name="sk.doxxbet.doxxbetui.wpbo_assignment.UserListFragment"
+        android:name="sk.doxxbet.doxxbetui.wpbo_assignment.ui.UserListFragment"
         android:label="@string/user_list_fragment_label"
         tools:layout="@layout/fragment_user_list">
 
