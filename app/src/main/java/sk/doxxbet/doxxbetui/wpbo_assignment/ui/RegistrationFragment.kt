@@ -37,6 +37,7 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         val mySharedPreferences = MySharedPreferences(requireContext())
         model.registerSuccess.observe(viewLifecycleOwner){
             mySharedPreferences.setRegistered(true)

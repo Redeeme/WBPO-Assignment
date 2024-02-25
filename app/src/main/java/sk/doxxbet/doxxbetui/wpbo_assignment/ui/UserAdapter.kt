@@ -4,15 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.UserItemBinding
 
+
 class UserAdapter(val context: Context, val delegate: UserClickDelegate) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     interface UserClickDelegate {
-        fun userClick(isChecked: Boolean, id: Int)
+        fun onCheck(id: Int)
+        fun onUncheck(id: Int)
     }
 
     var users: List<UserModel>? = null
@@ -42,9 +46,13 @@ class UserAdapter(val context: Context, val delegate: UserClickDelegate) :
                 println(e)
             }
             holder.binding.toggleButton.isChecked = user.followed
-            holder.binding.toggleButton.setOnClickListener {
-                holder.binding.toggleButton.isChecked = !holder.binding.toggleButton.isChecked
-                delegate.userClick(holder.binding.toggleButton.isChecked, user.id)
+
+            holder.binding.toggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    delegate.onCheck(user.id)
+                } else {
+                    delegate.onUncheck(user.id)
+                }
             }
         }
     }

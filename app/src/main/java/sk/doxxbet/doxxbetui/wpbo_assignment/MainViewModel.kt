@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import sk.doxxbet.doxxbetui.wpbo_assignment.client.FollowedUsersEntity
+import sk.doxxbet.doxxbetui.wpbo_assignment.client.FollowedUsersRepository
 import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.UserRepository
 import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.RegisterRequest
 import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.RegisterResponse
@@ -16,8 +18,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val followedUsersRepository: FollowedUsersRepository
 ) : ViewModel() {
+    init {
+        loadFollowed()
+    }
 
     private val _userListSuccess = MutableLiveData<ArrayList<UserDto>>()
     val userListSuccess: LiveData<ArrayList<UserDto>>
@@ -70,6 +76,30 @@ class MainViewModel @Inject constructor(
                 println("${response.message}111111")
                 _registerError.value = response.message
             }
+        }
+    }
+
+    private val _followedUsers = MutableLiveData<ArrayList<Int>>()
+    val followedUsers: LiveData<ArrayList<Int>>
+        get() = _followedUsers
+    private fun loadFollowed(){
+        viewModelScope.launch {
+            val response = followedUsersRepository.getAll()
+            _followedUsers.value = response as ArrayList<Int>
+        }
+    }
+
+    fun addFollow(id:Int){
+        viewModelScope.launch {
+            val response = followedUsersRepository.insert(FollowedUsersEntity(id))
+            _followedUsers.value?.add(id)
+        }
+    }
+
+    fun removeFollow(id:Int){
+        viewModelScope.launch {
+            val response = followedUsersRepository.delete(id)
+            _followedUsers.value?.remove(id)
         }
     }
 }

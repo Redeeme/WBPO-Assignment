@@ -46,7 +46,11 @@ class UserListFragment : Fragment(), UserAdapter.UserClickDelegate {
 
         model.userListSuccess.observe(viewLifecycleOwner){
             adapter.users = it.map { userDto ->
-                userDto.toUserModel(followed = true) // You can set followed based on your logic
+                var followed = false
+//                if (model.followedUsers.value?.contains(userDto.id) == true){
+//                    followed = true
+//                }
+                userDto.toUserModel(followed = followed) // You can set followed based on your logic
             }
         }
         binding.recyclerView.addOnScrollListener(object :
@@ -74,7 +78,11 @@ class UserListFragment : Fragment(), UserAdapter.UserClickDelegate {
         _binding = null
     }
 
-    override fun userClick(isChecked: Boolean, id: Int) {
+    override fun onCheck(id: Int) {
+        model.addFollow(id)
+    }
 
+    override fun onUncheck(id: Int) {
+        model.removeFollow(id)
     }
 }

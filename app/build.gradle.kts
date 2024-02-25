@@ -77,5 +77,8 @@ dependencies {
     implementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
     //Picasso
     implementation("com.squareup.picasso:picasso:2.5.2")
-
+    //
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 }
