@@ -13,7 +13,7 @@ suspend fun <T> executeRequest(
 
         val result = request.invoke()
         val body = result.body()
-        println("${body}111111")
+
         if (result.isSuccessful && body != null) {
             Resource.Success(body)
         } else {

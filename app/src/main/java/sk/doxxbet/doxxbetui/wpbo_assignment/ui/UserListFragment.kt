@@ -75,6 +75,6 @@ class UserListFragment : Fragment(), UserAdapter.UserClickDelegate {
     }
 
     override fun userClick(isChecked: Boolean, id: Int) {
-        TODO("Not yet implemented")
+
     }
 }

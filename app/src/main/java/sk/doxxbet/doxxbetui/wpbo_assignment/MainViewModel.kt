@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.UserRepository
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.RegisterRequest
+import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.RegisterResponse
 import sk.doxxbet.doxxbetui.wpbo_assignment.network.userRepo.dtos.UserDto
 import sk.doxxbet.doxxbetui.wpbo_assignment.ui.UserModel
 import javax.inject.Inject
@@ -47,6 +49,26 @@ class MainViewModel @Inject constructor(
 
             }else{
                 _userListError.value = response.message
+            }
+        }
+    }
+
+    private val _registerSuccess = MutableLiveData<RegisterResponse?>()
+    val registerSuccess: LiveData<RegisterResponse?>
+        get() = _registerSuccess
+
+    private val _registerError = MutableLiveData<String?>()
+    val registerError: LiveData<String?>
+        get() = _registerError
+
+    fun register(password: String, username: String, email: String){
+        viewModelScope.launch {
+            val response = userRepository.register(RegisterRequest(password,username,email))
+            if (response.isSuccess()){
+                _registerSuccess.value = response.data
+            }else{
+                println("${response.message}111111")
+                _registerError.value = response.message
             }
         }
     }

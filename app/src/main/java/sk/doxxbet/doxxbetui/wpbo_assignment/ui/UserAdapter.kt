@@ -35,15 +35,16 @@ class UserAdapter(val context: Context, val delegate: UserClickDelegate) :
             userHolder.binding.nameTextView.text = "${user.firstName} ${user.lastName}"
             try {
                 Picasso.with(holder.itemView.context)
-                    .load(user?.avatar)
+                    .load(user.avatar)
                     .networkPolicy(NetworkPolicy.NO_CACHE)
                     .into(userHolder.binding.avatarImageView)
             } catch (e: Throwable) {
                 println(e)
             }
+            holder.binding.toggleButton.isChecked = user.followed
             holder.binding.toggleButton.setOnClickListener {
+                holder.binding.toggleButton.isChecked = !holder.binding.toggleButton.isChecked
                 delegate.userClick(holder.binding.toggleButton.isChecked, user.id)
-
             }
         }
     }

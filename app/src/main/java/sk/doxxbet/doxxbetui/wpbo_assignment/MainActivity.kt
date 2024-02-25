@@ -3,10 +3,13 @@ package sk.doxxbet.doxxbetui.wpbo_assignment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import sk.doxxbet.doxxbetui.wpbo_assignment.client.MySharedPreferences
 import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
@@ -31,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+
 
     }
 }

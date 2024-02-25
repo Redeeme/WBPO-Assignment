@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import sk.doxxbet.doxxbetui.wpbo_assignment.MainViewModel
 import sk.doxxbet.doxxbetui.wpbo_assignment.R
+import sk.doxxbet.doxxbetui.wpbo_assignment.client.MySharedPreferences
 import sk.doxxbet.doxxbetui.wpbo_assignment.databinding.FragmentRegistrationBinding
 
 /**
@@ -27,6 +28,7 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //checkForRegistration()
 
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,14 +37,30 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mySharedPreferences = MySharedPreferences(requireContext())
+        model.registerSuccess.observe(viewLifecycleOwner){
+            mySharedPreferences.setRegistered(true)
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
 
         binding.registerButton.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            model.register(
+                binding.registrationPassword.text.toString(),
+                binding.registrationUsername.text.toString(),
+                binding.registrationEmail.text.toString()
+                )
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkForRegistration() {
+        val mySharedPreferences = MySharedPreferences(requireContext())
+        if (mySharedPreferences.getRegistered()) {
+            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
     }
 }
