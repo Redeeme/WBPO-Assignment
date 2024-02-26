@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "sk.doxxbet.doxxbetui.wpbo_assignment"
+    namespace = "sk.wpbo_assignment"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "sk.doxxbet.doxxbetui.wpbo_assignment"
+        applicationId = "sk.wpbo_assignment"
         minSdk = 30
         //noinspection EditedTargetSdkVersion
         targetSdk = 34

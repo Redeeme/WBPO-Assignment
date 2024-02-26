@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/cardview_dark_background"
         android:padding="16dp"
-        tools:context=".ui.RegistrationFragment">
+        tools:context="sk.wpbo_assignment.ui.RegistrationFragment">
         <!-- Overlay for Error Alert -->
 
         <androidx.cardview.widget.CardView

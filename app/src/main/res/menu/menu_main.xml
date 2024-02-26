@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="sk.doxxbet.doxxbetui.wpbo_assignment.MainActivity">
+    tools:context="sk.wpbo_assignment.sk.wpbo_assignment.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
