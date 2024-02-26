@@ -41,17 +41,48 @@ class UserListFragment : Fragment(), UserAdapter.UserClickDelegate {
         adapter = UserAdapter(requireContext(), this)
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL
+            )
+        )
         binding.recyclerView.adapter = adapter
 
-        model.userListSuccess.observe(viewLifecycleOwner){
+        model.userListSuccess.observe(viewLifecycleOwner) {
+            binding.retryOverlay.visibility = View.GONE
             adapter.users = it.map { userDto ->
                 var followed = false
-//                if (model.followedUsers.value?.contains(userDto.id) == true){
-//                    followed = true
-//                }
+                if (model.followedUsers.value?.contains(userDto.id) == true) {
+                    followed = true
+                }
                 userDto.toUserModel(followed = followed) // You can set followed based on your logic
             }
+        }
+
+        model.userListLoading.observe(viewLifecycleOwner) { isLoading ->
+            isLoading?.let {
+                if (it) {
+                    binding.loadingOverlay.visibility = View.VISIBLE
+                } else {
+                    binding.loadingOverlay.visibility = View.GONE
+                }
+            }
+        }
+
+        model.userListError.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                binding.errorTv.text = errorMessage
+                binding.errorOverlay.visibility = View.VISIBLE
+                binding.retryOverlay.visibility = View.VISIBLE
+            }
+        }
+
+        binding.errorOkButton.setOnClickListener {
+            binding.errorOverlay.visibility = View.GONE
+        }
+        binding.retryButton.setOnClickListener {
+            model.loadUsers()
         }
         binding.recyclerView.addOnScrollListener(object :
             UserPaginationScrollListener(layoutManager) {

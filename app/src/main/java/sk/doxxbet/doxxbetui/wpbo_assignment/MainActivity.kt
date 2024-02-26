@@ -28,14 +28,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.UserListFragment, R.id.RegistrationFragment))
+        appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.UserListFragment, R.id.RegistrationFragment))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-
 
     }
 }

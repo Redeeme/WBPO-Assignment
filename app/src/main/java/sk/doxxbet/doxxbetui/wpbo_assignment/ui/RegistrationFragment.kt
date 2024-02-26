@@ -28,7 +28,7 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //checkForRegistration()
+        checkForRegistration()
 
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding.root
@@ -37,9 +37,8 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         val mySharedPreferences = MySharedPreferences(requireContext())
-        model.registerSuccess.observe(viewLifecycleOwner){
+        model.registerSuccess.observe(viewLifecycleOwner) {
             mySharedPreferences.setRegistered(true)
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -49,7 +48,28 @@ class RegistrationFragment : Fragment() {
                 binding.registrationPassword.text.toString(),
                 binding.registrationUsername.text.toString(),
                 binding.registrationEmail.text.toString()
-                )
+            )
+        }
+
+        model.registerLoading.observe(viewLifecycleOwner) { isLoading ->
+            isLoading?.let {
+                if (it) {
+                    binding.loadingOverlay.visibility = View.VISIBLE
+                } else {
+                    binding.loadingOverlay.visibility = View.GONE
+                }
+            }
+        }
+
+        model.registerError.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                binding.errorTv.text = errorMessage
+                binding.errorOverlay.visibility = View.VISIBLE
+            }
+        }
+
+        binding.errorOkButton.setOnClickListener {
+            binding.errorOverlay.visibility = View.GONE
         }
     }
 
@@ -61,7 +81,7 @@ class RegistrationFragment : Fragment() {
     private fun checkForRegistration() {
         val mySharedPreferences = MySharedPreferences(requireContext())
         if (mySharedPreferences.getRegistered()) {
-            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 }

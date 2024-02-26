@@ -6,5 +6,14 @@
     <string name="user_list_fragment_label">User List Screen</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="retry">Retry</string>
+    <string name="error_message">Error Message</string>
+    <string name="ok">OK</string>
+    <string name="unfollowed">Unfollowed</string>
+    <string name="followed">followed</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="register">Register</string>
+    <string name="username">username</string>
 
 </resources>

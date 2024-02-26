@@ -13,7 +13,9 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/UserListFragment" />
+            app:destination="@id/UserListFragment"
+            app:popUpTo="@id/RegistrationFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/UserListFragment"

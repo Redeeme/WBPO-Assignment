@@ -33,6 +33,11 @@ class MainViewModel @Inject constructor(
     val userListError: LiveData<String?>
         get() = _userListError
 
+    private val _userListLoading = MutableLiveData<Boolean?>()
+    val userListLoading: LiveData<Boolean?>
+        get() = _userListLoading
+
+
     var currentPage = 1
     val perPage = 5
     var total: Int? = null
@@ -41,7 +46,9 @@ class MainViewModel @Inject constructor(
 
     fun loadUsers(){
         viewModelScope.launch {
+            _userListLoading.value = true
             val response = userRepository.getUsers(currentPage,perPage)
+            _userListLoading.value = false
             if (response.isSuccess()){
                 if (_userListSuccess.value != null){
                     val userlist: ArrayList<UserDto> = _userListSuccess.value!!
@@ -67,9 +74,15 @@ class MainViewModel @Inject constructor(
     val registerError: LiveData<String?>
         get() = _registerError
 
+    private val _registerLoading = MutableLiveData<Boolean?>()
+    val registerLoading: LiveData<Boolean?>
+        get() = _registerLoading
+
     fun register(password: String, username: String, email: String){
         viewModelScope.launch {
+            _registerLoading.value = true
             val response = userRepository.register(RegisterRequest(password,username,email))
+            _registerLoading.value = false
             if (response.isSuccess()){
                 _registerSuccess.value = response.data
             }else{
@@ -91,14 +104,14 @@ class MainViewModel @Inject constructor(
 
     fun addFollow(id:Int){
         viewModelScope.launch {
-            val response = followedUsersRepository.insert(FollowedUsersEntity(id))
+            followedUsersRepository.insert(FollowedUsersEntity(id))
             _followedUsers.value?.add(id)
         }
     }
 
     fun removeFollow(id:Int){
         viewModelScope.launch {
-            val response = followedUsersRepository.delete(id)
+            followedUsersRepository.delete(id)
             _followedUsers.value?.remove(id)
         }
     }

@@ -27,10 +27,12 @@ class AppModule {
             .databaseBuilder(
                 context,
                 MyDatabase::class.java,
-                MyDatabase.DATABASE_NAME)
+                MyDatabase.DATABASE_NAME
+            )
             .fallbackToDestructiveMigration()
             .build()
     }
+
     @Provides
     fun provideFollowedUsersDao(
         myDatabase: MyDatabase
